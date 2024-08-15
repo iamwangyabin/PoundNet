@@ -1,0 +1,14 @@
+clip
+hydra-core
+wandb
+datasets
+lightning
+albumentations
+scikit-learn
+opencv-python
+git+https://github.com/rwightman/pytorch-image-models.git@v0.9.12
+git+https://github.com/openai/CLIP.git
+
+
+
+

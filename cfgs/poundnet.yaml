@@ -1,0 +1,70 @@
+arch: "poundnet"
+test_name: "Poundnet_1"
+
+eval_pipeline: utils.validate_poundnet
+resume:
+  path: './weights/poundnet_ViTL_Progan_20240506_23_30_25.ckpt'
+  target: utils.resume_tools.resume_lightning
+
+model:
+  NAME: "ViT-L/14"
+  N_CTX_VISION: 16
+  N_CTX_TEXT: 16
+  CTX_INIT: False
+  PROMPT_DEPTH_VISION: 8
+  PROMPT_DEPTH_TEXT: 8
+  PROMPT_NUM_TEXT: 1
+
+
+datasets:
+  train:
+    multicalss_names: ["airplane", "bird", "bottle", "car", "chair", "diningtable", "horse", "person", "sheep", "train",
+                       "bicycle", "boat", "bus", "cat", "cow", "dog", "motorbike", "pottedplant", "sofa", "tvmonitor"]
+
+  base_path: "/root/autodl-tmp/data"
+  source:
+
+    - { target: data.ArrowDatasets,
+        data_root: '${datasets.base_path}/DiffusionForensics',
+        sub_sets: [ 'lsun_bedroom_adm', 'lsun_bedroom_iddpm', 'lsun_bedroom_ddpm', 'lsun_bedroom_pndm',
+                  'lsun_bedroom_sdv2', 'lsun_bedroom_ldm', 'lsun_bedroom_vqdiffusion', 'lsun_bedroom_if',
+                  'lsun_bedroom_dalle2', 'lsun_bedroom_midjourney' ],
+        split: 'test',
+        benchmark_name: 'DiffusionForensics' }
+
+    - { target: data.ArrowDatasets,
+        data_root: '${datasets.base_path}/Ojha',
+        sub_sets: [ "dalle", "glide_100_10", "glide_100_27", "glide_50_27", "guided", "ldm_100", "ldm_200", "ldm_200_cfg" ],
+        split: 'test',
+        benchmark_name: 'Ojha' }
+
+    - { target: data.ArrowDatasets,
+        data_root: '${datasets.base_path}/ForenSynths',
+        sub_sets: [ "biggan", "crn", "cyclegan", "deepfake", "gaugan", "imle", "progan", "san", "seeingdark", "stargan",
+                  "stylegan", "stylegan2", "whichfaceisreal"  ],
+        split: 'test',
+        benchmark_name: 'ForenSynths'}
+
+    - { target: data.ArrowDatasets,
+        data_root: '${datasets.base_path}/DIF',
+        sub_sets: ['biggan',  'cyclegan',  'dalle_2',  'dalle_mini',  'gaugan',  'glide',  'mj',  'progan',  'sd14',  'sd21',
+                 'stargan',  'stylegan',  'stylegan2'],
+        split: 'test',
+        benchmark_name: 'DIF'}
+
+        
+  batch_size: 64
+  loader_workers: 32
+
+  trsf:
+    - _target_: data.Compress
+      method: "JPEG"
+      qf: 90
+    - _target_: torchvision.transforms.Resize
+      size: 256
+    - _target_: torchvision.transforms.CenterCrop
+      size: 224
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean: [0.48145466, 0.4578275, 0.40821073]
+      std: [0.26862954, 0.26130258, 0.27577711]
