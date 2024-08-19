@@ -1,5 +1,7 @@
 # Penny-Wise and Pound-Foolish in Deepfake Detection 
 
+Under construction...
+
 ## (1) Setup
 
 ### Install packages
@@ -8,11 +10,15 @@
 
 ### Download model weights
 
+All checkpoints are trained with different seeds, but in the main paper, we primarily report the performance metrics of the first model (poundnet_ViTL_Progan_20240506_23_30_25).
+
 wget -O ./weights/poundnet_ViTL_Progan_20240506_23_30_25.ckpt https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240506_23_30_25/last.ckpt
 
 wget -O ./weights/poundnet_ViTL_Progan_20240804_21_16_47.ckpt https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240804_21_16_47/last.ckpt
 
 wget -O ./weights/poundnet_ViTL_Progan_20240805_10_31_08.ckpt  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240805_10_31_08/last.ckpt
+
+wget -O ./weights/poundnet_ViTL_Progan_20240805_10_31_08.ckpt  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240506_23_30_25/last.ckpt
 
 ### Download benchmark data
 
