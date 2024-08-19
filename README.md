@@ -26,6 +26,9 @@ bash download_data.sh
 
 You can also use, huggingface-cli, to download data.
 
+
+All datasets are used in Arrow format. If anyone is interested in PoundNet's performance on a publicly available dataset before we submit the Arrow dataset construction code, you can submit an issue, and we will consider running the model on that dataset and providing the results.
+
 ## (2) Test your models
 
 python test.py --cfg cfg/poundnet.yaml
