@@ -38,7 +38,18 @@ python test.py --cfg cfg/poundnet.yaml
 This repository borrows partially from the [CNNDetection](https://github.com/PeterWang512/CNNDetection).
 
 
-
+## (B) Cite
+````
+@misc{wang2024pennywisepoundfoolishdeepfakedetection,
+      title={Penny-Wise and Pound-Foolish in Deepfake Detection}, 
+      author={Yabin Wang and Zhiwu Huang and Su Zhou and Adam Prugel-Bennett and Xiaopeng Hong},
+      year={2024},
+      eprint={2408.08412},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2408.08412}, 
+}
+`````
 
 
 
