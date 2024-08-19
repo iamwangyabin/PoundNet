@@ -18,7 +18,7 @@ wget -O ./weights/poundnet_ViTL_Progan_20240804_21_16_47.ckpt https://huggingfac
 
 wget -O ./weights/poundnet_ViTL_Progan_20240805_10_31_08.ckpt  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240805_10_31_08/last.ckpt
 
-wget -O ./weights/poundnet_ViTL_Progan_20240805_10_31_08.ckpt  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240506_23_30_25/last.ckpt
+wget -O ./weights/poundnet_ViTL_Progan_20240506_23_30_25.ckpt  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240506_23_30_25/last.ckpt
 
 ### Download benchmark data
 
