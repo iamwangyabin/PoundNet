@@ -27,7 +27,7 @@ bash download_data.sh
 You can also use, huggingface-cli, to download data.
 
 
-All datasets are used in Arrow format. If anyone is interested in PoundNet's performance on a publicly available dataset before we submit the Arrow dataset construction code, you can submit an issue, and we will consider running the model on that dataset and providing the results.
+All datasets are used in Arrow format. If anyone is interested in PoundNet's performance on a publicly available dataset and does not want to build the dataset, you can submit an issue, and we will consider running the model on that dataset and providing the results, even uploading the data to huggingface if possible.
 
 ## (2) Test your models
 
