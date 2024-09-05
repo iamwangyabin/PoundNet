@@ -2,6 +2,9 @@
 
 Under construction...
 
+Start cleaning the training code.
+
+
 ## (1) Setup
 
 ### Install packages
