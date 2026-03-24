@@ -62,19 +62,12 @@ def calculate_acc_auc_f1(y_true, y_pred, thres):
 
 
 def validate_poundnet(model, loader, specific_cls=False):
-
-    if specific_cls:
-        from networks.poundnet_detector import load_clip_to_cpu
-        clip_model = load_clip_to_cpu(model.cfg)
-        token_embedding = clip_model.token_embedding
-
-
     with torch.no_grad():
         y_true, y_pred, y_logits = [], [], []
         print("Length of dataset: %d" % (len(loader)))
         for img, label in tqdm(loader):
             in_tens = img.cuda()
-            logits = model(in_tens)['logits']
+            logits = model.forward_binary(in_tens)['logits'] if hasattr(model, "forward_binary") else model(in_tens)['logits']
             y_logits.extend(logits.flatten().tolist())
             y_pred.extend(F.softmax(logits, 1)[:,1].flatten().tolist())
             y_true.extend(label.flatten().tolist())
@@ -85,4 +78,3 @@ def validate_poundnet(model, loader, specific_cls=False):
     result_dict = { 'ap': ap, 'auc': auc, 'f1': f1, 'r_acc0': r_acc0, 'f_acc0': f_acc0, 'acc0': acc0,
         'num_real': num_real, 'num_fake': num_fake, 'y_true': y_true, 'y_pred': y_pred, 'y_logits': y_logits }
     return result_dict
-

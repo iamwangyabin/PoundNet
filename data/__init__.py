@@ -1,2 +1,2 @@
 from .arrow_datasets import ArrowDatasets
-from .augmentations import Compress
+from .augmentations import Compress, DataAugment, RandomCompress

@@ -218,20 +218,38 @@ class PoundNet(nn.Module):
                 enabled.add(name)
         print(f"Parameters to be updated: {enabled}")
 
-    def forward(self, image):
+    def _encode_image(self, image):
+        image_features = self.image_encoder(image)
+        return image_features / image_features.norm(dim=-1, keepdim=True)
+
+    def _encode_text(self, prompts, tokenized_prompts):
+        text_features = self.text_encoder(prompts, tokenized_prompts)
+        return text_features / text_features.norm(dim=-1, keepdim=True)
+
+    def _binary_logits_from_image_features(self, image_features):
         prompts = self.prompt_learner.forward_general_realfake()
         column_maxes = self.tokenized_prompts.max(dim=0)[0] + torch.arange(self.tokenized_prompts.size(1))
         new_token = column_maxes.repeat(prompts.size(0), 1)
-        text_features = self.text_encoder(prompts, new_token)
+        text_features = self._encode_text(prompts, new_token)
+        return self.logit_scale.exp() * image_features @ text_features.t()
 
-        text_features = text_features / text_features.norm(dim=-1, keepdim=True)
+    def forward(self, image, return_binary=False):
+        image_features = self._encode_image(image)
 
-        image_features = self.image_encoder(image)
-        image_features = image_features / image_features.norm(dim=-1, keepdim=True)
+        if return_binary:
+            prompts = self.prompt_learner()
+            text_features = self._encode_text(prompts, self.tokenized_prompts)
+            logits = self.logit_scale.exp() * image_features @ text_features.t()
+            b_logits = self._binary_logits_from_image_features(image_features)
+            return {'logits': logits, 'b_logits': b_logits, 'features': image_features}
 
-        logits = self.logit_scale.exp() * image_features @ text_features.t()
+        logits = self._binary_logits_from_image_features(image_features)
         return {'logits': logits, 'features': image_features}
 
+    def forward_binary(self, image):
+        image_features = self._encode_image(image)
+        logits = self._binary_logits_from_image_features(image_features)
+        return {'logits': logits, 'features': image_features}
 
 
 
