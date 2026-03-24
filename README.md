@@ -1,5 +1,8 @@
 # Penny-Wise and Pound-Foolish in Deepfake Detection 
 
+Accepted Transactions on Pattern Analysis and Machine Intelligence
+
+
 Under construction...
 
 Start cleaning the training code.
