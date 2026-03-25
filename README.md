@@ -1,13 +1,13 @@
 # Penny-Wise and Pound-Foolish in AI-Generated Image Detection
 
+<img width="2045" height="521" alt="4f8ddb27024234ca1f1774081d4c6fc7681ef8192eaabd4f775aa8173b42682a" src="https://github.com/user-attachments/assets/4ca34bb6-df38-4eb6-a10c-9299657a13b0" />
+
 Official code release for **Penny-Wise and Pound-Foolish in AI-Generated Image Detection**.
 
 This repository contains training and evaluation code for PoundNet, a CLIP-based detector built around asymmetric prompt learning for binary real/fake classification and category-aware supervision.
 
 
-## Environment Setup
-
-### 1. Create environment
+## 1. Environment Setup
 
 Install PyTorch first from [pytorch.org](https://pytorch.org/) according to your CUDA version, then install the remaining dependencies:
 
@@ -15,24 +15,7 @@ Install PyTorch first from [pytorch.org](https://pytorch.org/) according to your
 pip install -r requirements.txt
 ```
 
-## 2. Download Checkpoints
-
-Create a weights directory and download the released checkpoints:
-
-```bash
-mkdir -p weights
-
-wget -O ./weights/poundnet_ViTL_Progan_20240506_23_30_25.ckpt \
-  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240506_23_30_25/last.ckpt
-
-wget -O ./weights/poundnet_ViTL_Progan_20240804_21_16_47.ckpt \
-  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240804_21_16_47/last.ckpt
-
-wget -O ./weights/poundnet_ViTL_Progan_20240805_10_31_08.ckpt \
-  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240805_10_31_08/last.ckpt
-```
-
-## 3. Download Datasets
+## 2. Download Datasets
 
 PoundNet expects datasets saved in Hugging Face Arrow format and loaded with `datasets.load_from_disk(...)`.
 Each dataset directory should contain:
@@ -59,16 +42,31 @@ Example local layout:
 └── Ojha
 ```
 
-## 4. Quick Start
+## 3. Quick Start
 
-### Evaluate a released model
+### Evaluate
+
+Create a weights directory and download the released checkpoints:
+
+```bash
+mkdir -p weights
+
+wget -O ./weights/poundnet_ViTL_Progan_20240506_23_30_25.ckpt \
+  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240506_23_30_25/last.ckpt
+
+wget -O ./weights/poundnet_ViTL_Progan_20240804_21_16_47.ckpt \
+  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240804_21_16_47/last.ckpt
+
+wget -O ./weights/poundnet_ViTL_Progan_20240805_10_31_08.ckpt \
+  https://huggingface.co/nebula/PoundNet/resolve/main/poundnet_ViTL_Progan_20240805_10_31_08/last.ckpt
+```
 
 ```bash
 python test.py --cfg cfgs/poundnet.yaml \
   datasets.base_path=/path/to/DF-arrow
 ```
 
-### Train PoundNet
+### Train
 
 The official training config is:
 
@@ -78,11 +76,11 @@ python train.py --cfg cfgs/train/poundnet_official.yaml \
 ```
 
 
-## Acknowledgments
+## 4. Acknowledgments
 
 This repository borrows partially from [CNNDetection](https://github.com/PeterWang512/CNNDetection).
 
-## Citation
+## 5. Citation
 
 If this repository is useful in your work, please cite:
 
