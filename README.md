@@ -1,11 +1,10 @@
-# Penny-Wise and Pound-Foolish in AI-Generated Image Detection
-
 <img width="2045" height="521" alt="4f8ddb27024234ca1f1774081d4c6fc7681ef8192eaabd4f775aa8173b42682a" src="https://github.com/user-attachments/assets/4ca34bb6-df38-4eb6-a10c-9299657a13b0" />
 
-Official code release for **Penny-Wise and Pound-Foolish in AI-Generated Image Detection**.
+# Penny-Wise and Pound-Foolish in AI-Generated Image Detection
+
+Official code for **Penny-Wise and Pound-Foolish in AI-Generated Image Detection**.
 
 This repository contains training and evaluation code for PoundNet, a CLIP-based detector built around asymmetric prompt learning for binary real/fake classification and category-aware supervision.
-
 
 ## 1. Environment Setup
 
